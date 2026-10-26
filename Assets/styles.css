@@ -1,0 +1,65 @@
+:root {
+    --nc-red: #b4232d;
+    --nc-red-hover: #941b24;
+    --nc-ink: #17202b;
+    --nc-muted: #657080;
+    --nc-border: #dce0e6;
+    --nc-surface: #f5f6f8;
+}
+.stApp, [data-testid="stMain"] { background-color: #ffffff; color: var(--nc-ink); }
+[data-testid="stHeader"] { background: rgba(255, 255, 255, 0.96); }
+[data-testid="stSidebar"] { background-color: #111318; border-right: 1px solid #252931; }
+[data-testid="stSidebar"][aria-expanded="true"] { min-width: 230px; max-width: 230px; }
+[data-testid="stSidebar"][aria-expanded="false"] { min-width: 0 !important; max-width: 0 !important; }
+[data-testid="stSidebar"] [data-testid="stSidebarContent"] { padding-top: 3rem; }
+[data-testid="stSidebar"] [data-testid="stRadio"] label {
+    padding: 0.7rem 0.85rem; border: 1px solid transparent; border-radius: 9px;
+    transition: background-color 0.15s ease;
+}
+[data-testid="stSidebar"] [data-testid="stRadio"] label:hover { background-color: #22262e; }
+[data-testid="stSidebar"] [data-testid="stRadio"] label:has(input:checked) { background-color: #2b1c23; border-color: #733039; }
+[data-testid="stSidebar"] [data-testid="stRadio"] label p { color: #f8f9fb; font-size: 15px; font-weight: 600; }
+[data-testid="stSidebar"] [data-testid="stCaptionContainer"] p { color: #aeb5c0; font-size: 11px; line-height: 1.6; }
+[data-testid="stSidebar"] button { color: #f8f9fb; }
+[data-testid="stMainBlockContainer"].stMainBlockContainer {
+    width: 100%; max-width: 1180px; margin-left: auto; margin-right: auto;
+    box-sizing: border-box; padding-top: 6rem; padding-bottom: 2.5rem;
+}
+[data-testid="stMain"] h1, [data-testid="stMain"] h2, [data-testid="stMain"] h3 {
+    color: var(--nc-red); letter-spacing: -0.02em;
+}
+[data-testid="stMain"] [data-testid="stCaptionContainer"] p { color: var(--nc-muted); line-height: 1.55; }
+[data-testid="stMain"] [data-testid="stCaptionContainer"],
+[data-testid="stSidebar"] [data-testid="stCaptionContainer"] { opacity: 1; }
+[data-testid="stMain"] [data-testid="stVerticalBlockBorderWrapper"] > div { border-radius: 12px; }
+[data-testid="stMain"] button {
+    border-radius: 8px; min-height: 42px; font-weight: 600;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+[data-testid="stMain"] button:focus-visible { outline: 3px solid rgba(180, 35, 45, 0.22); outline-offset: 2px; }
+[data-testid="stDownloadButton"] button { background-color: #17202b; color: #ffffff; border: 1px solid #17202b; font-weight: 600; }
+[data-testid="stDownloadButton"] button p { color: inherit; }
+[data-testid="stDownloadButton"] button:hover:enabled { background-color: #2d3846; border-color: #2d3846; color: #ffffff; }
+[data-testid="stDownloadButton"] button:disabled { opacity: 0.5; }
+.home-title { text-align: center; margin: 0 0 28px !important; line-height: 0; }
+.home-logo {
+    display: block; position: relative; width: 280px; max-width: 100%;
+    aspect-ratio: 9 / 2; margin: 0 auto; overflow: hidden;
+}
+.home-logo img {
+    position: absolute; display: block; width: 177.777778%; max-width: none;
+    height: auto; left: -38.888889%; top: -162.5%;
+}
+.chart-label { text-align: center; font-weight: 700; font-size: 15px !important; }
+.chart-date { text-align: center; font-size: 11px !important; color: var(--nc-muted); }
+.chart-caption { padding: 8px 4px 4px; }
+.chart-caption .chart-label, .chart-caption .chart-date { margin: 0 !important; padding: 0 !important; line-height: 1.6; }
+.chart-label a { color: var(--nc-ink) !important; font-size: inherit; font-weight: inherit; text-decoration: none; }
+.chart-label a:hover, .chart-label a:focus-visible { color: var(--nc-red) !important; text-decoration: underline; }
+.st-key-manual_guide button { min-height: 48px !important; }
+.st-key-manual_guide button p, .st-key-manual_guide button strong { font-size: 15px !important; font-weight: 700 !important; }
+@media (max-width: 640px) {
+    [data-testid="stMainBlockContainer"].stMainBlockContainer { padding-top: 6rem; padding-left: 1rem; padding-right: 1rem; }
+    .home-title { margin-bottom: 24px !important; }
+    .home-logo { width: 220px; }
+}

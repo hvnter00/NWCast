@@ -1,0 +1,42 @@
+.prediction-title {
+    font-family: Arial, sans-serif; font-size: clamp(24px, 2.8vw, 32px) !important;
+    font-weight: 800 !important; text-align: center; margin: 0 0 20px !important; line-height: 1.3;
+}
+.prediction-section-title { font-family: Arial, sans-serif; font-size: 18px !important; font-weight: 700 !important; margin: 12px 0 14px !important; }
+.prediction-disclaimer {
+    background: #fdf6f6; border: 1px solid #efd9dc; border-left: 4px solid #b4232d;
+    border-radius: 8px; color: #3c4654; padding: 13px 16px; margin: 4px 0 24px;
+    font-size: 12px; line-height: 1.65;
+}
+.prediction-disclaimer p { margin: 0; color: inherit; font-size: inherit; line-height: inherit; }
+.prediction-disclaimer strong { color: #17202b; }
+.prediction-input-format { font-size: 13px; margin: 8px 0 12px !important; color: #657080; }
+.st-key-prediction_make button, .st-key-prediction_export button {
+    background: #b4232d !important; border: 1px solid #b4232d !important; min-height: 48px;
+}
+.st-key-prediction_make button p, .st-key-prediction_export button p { color: #ffffff !important; font-weight: 700 !important; font-size: 14px !important; }
+.st-key-prediction_make button:hover:enabled, .st-key-prediction_export button:hover:enabled { background: #941b24 !important; border-color: #941b24 !important; }
+.st-key-prediction_make button:disabled, .st-key-prediction_export button:disabled { opacity: 0.5; }
+.st-key-prediction_template_excel button, .st-key-prediction_manual_guide button { min-height: 42px; }
+.prediction-horizon-label { font-size: 18px !important; font-weight: 700 !important; text-align: center; margin: 18px 0 12px !important; }
+[class*="st-key-prediction_horizon_"] button { background: #ffffff !important; border: 1px solid #dce0e6; border-radius: 10px; min-height: 62px; }
+[class*="st-key-prediction_horizon_"] button p { font-weight: 800 !important; font-size: 24px !important; }
+[class*="st-key-prediction_horizon_"] button:hover:enabled { border-color: #b4232d; background: #fdf9f9 !important; }
+.prediction-card-caption { text-align: center; font-size: 12px; line-height: 1.7; margin: 10px 0 22px !important; color: #657080; }
+.prediction-detail-heading p { color: #17202b; margin: 0 0 6px !important; font-size: 13px; }
+.prediction-chart-legend { text-align: center; margin: 0 !important; font-size: 12px; }
+.prediction-evaluation { overflow-x: auto; margin: 8px 0 12px; border: 1px solid #dce0e6; border-radius: 9px; }
+.prediction-evaluation table { width: 100%; border-collapse: collapse; font-size: 12px; color: #17202b; }
+.prediction-evaluation th, .prediction-evaluation td { padding: 11px 9px; text-align: right; border-bottom: 1px solid #e9ecf0; white-space: nowrap; }
+.prediction-evaluation tbody tr:last-child td { border-bottom: 0; }
+.prediction-evaluation th:first-child, .prediction-evaluation td:first-child { text-align: left; }
+.prediction-evaluation th { font-size: 11px; font-weight: 700; color: #4a5666; background: #f5f6f8; }
+.prediction-model-badge { display: block; color: #168050; font-size: 10px; font-weight: 700; margin-top: 3px; }
+.prediction-cv-score { background: #f5f6f8; border: 1px solid #e5e8ed; border-radius: 9px; padding: 14px; margin-top: 14px; font-size: 13px; color: #17202b; }
+.prediction-cv-score small { display: block; color: #657080; font-size: 11px; margin-top: 6px; }
+.st-key-prediction_return button { background: #ffffff !important; border: 1px solid #c6cdd6 !important; min-height: 48px; }
+.st-key-prediction_return button p { color: #17202b !important; font-weight: 700 !important; }
+.st-key-prediction_return button:hover:enabled { background: #f5f6f8 !important; border-color: #17202b !important; }
+
+[data-testid="stMain"]:has(.prediction-title) button[aria-label="Download as CSV"],
+[data-testid="stMain"]:has(.prediction-title) button[title="Download as CSV"] { display: none; }

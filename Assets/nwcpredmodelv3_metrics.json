@@ -1,0 +1,264 @@
+{
+  "schema_version": 1,
+  "model_file": "nwcpredmodelv3.joblib",
+  "created_at_utc": "2026-10-26T03:44:08.348016+00:00",
+  "provenance": {
+    "method": "Fixed chronological holdout evaluated before final full-data refit.",
+    "preprocessing": "Joint weekday grid; causal forward fill; shared 48-feature recipe; common complete targets.",
+    "data_start": "2016-01-04",
+    "data_end": "2026-09-30",
+    "data_grid_rows": 2803,
+    "common_supervised_rows": 2728,
+    "gap_observations": 14,
+    "model_refit_performed": true,
+    "refit_scope": "All common complete feature-target rows; fixed tuned hyperparameters; no retuning.",
+    "source_notebook_sha256": "6b50050ca10df4e64254f6cb61d52bed0db7a77daf761c16211e1492721c99d5",
+    "training_configuration": {
+      "n_splits": 5,
+      "n_iter": 30,
+      "train_ratio": 0.8,
+      "gap": 14,
+      "seed": 42,
+      "search_jobs": 1,
+      "scoring": "neg_root_mean_squared_error",
+      "selection": "minimum_cv_rmse_per_horizon",
+      "xgboost_device": "cpu",
+      "parameter_choices": {
+        "XGBoost": {
+          "n_estimators": [
+            200,
+            400,
+            600,
+            1000
+          ],
+          "learning_rate": [
+            0.01,
+            0.03
+          ],
+          "max_depth": [
+            5,
+            8,
+            10
+          ],
+          "min_child_weight": [
+            1,
+            5,
+            10
+          ],
+          "subsample": [
+            0.7
+          ],
+          "colsample_bytree": [
+            0.5,
+            0.8
+          ],
+          "gamma": [
+            0
+          ],
+          "reg_alpha": [
+            0,
+            0.1,
+            0.5,
+            1,
+            3,
+            5,
+            10
+          ],
+          "reg_lambda": [
+            1,
+            5,
+            10,
+            20,
+            50
+          ]
+        },
+        "GBM": {
+          "n_estimators": [
+            200,
+            400,
+            600,
+            1000
+          ],
+          "learning_rate": [
+            0.01,
+            0.03
+          ],
+          "max_depth": [
+            5,
+            8,
+            10
+          ],
+          "min_samples_leaf": [
+            20,
+            50
+          ],
+          "subsample": [
+            0.7
+          ]
+        }
+      }
+    },
+    "cv_folds": [
+      {
+        "fold": 1,
+        "train_rows": 349,
+        "validation_rows": 361,
+        "last_training_target_h14": "2017-07-05",
+        "validation_start": "2017-07-06"
+      },
+      {
+        "fold": 2,
+        "train_rows": 710,
+        "validation_rows": 361,
+        "last_training_target_h14": "2018-11-22",
+        "validation_start": "2018-11-23"
+      },
+      {
+        "fold": 3,
+        "train_rows": 1071,
+        "validation_rows": 361,
+        "last_training_target_h14": "2020-04-10",
+        "validation_start": "2020-04-13"
+      },
+      {
+        "fold": 4,
+        "train_rows": 1432,
+        "validation_rows": 361,
+        "last_training_target_h14": "2021-10-12",
+        "validation_start": "2021-10-13"
+      },
+      {
+        "fold": 5,
+        "train_rows": 1793,
+        "validation_rows": 361,
+        "last_training_target_h14": "2023-03-01",
+        "validation_start": "2023-03-02"
+      }
+    ],
+    "checks": {
+      "train_target_precedes_holdout": true,
+      "cv_training_targets_precede_validation": true
+    }
+  },
+  "evaluation": {
+    "kind": "historical_holdout_before_full_refit",
+    "origin_start": "2024-08-08",
+    "origin_end": "2026-09-10",
+    "n": 546,
+    "training_origin_start": "2016-02-15",
+    "training_origin_end": "2024-07-18",
+    "training_n": 2168,
+    "target_date_end_by_horizon": {
+      "1": "2026-09-11",
+      "7": "2026-09-21",
+      "14": "2026-09-30"
+    },
+    "target_units": "USD/tonne change",
+    "r2_definition": "R2 on future Coal USD price changes, relative to holdout mean change.",
+    "direction_accuracy": "Sign agreement; primary DA excludes zero actual USD changes.",
+    "cv_units": "Volatility-normalized log return; different units from USD RMSE.",
+    "baseline": "Zero future price change (persistence).",
+    "fresh_prediction_has_actual": false,
+    "describes_final_refitted_estimators": false
+  },
+  "selected_models": {
+    "1": "XGBoost_H1",
+    "7": "XGBoost_H7",
+    "14": "XGBoost_H14"
+  },
+  "models": {
+    "XGBoost_H1": {
+      "horizon": 1,
+      "family": "XGBoost",
+      "rmse_usd": 1.752114964336475,
+      "mae_usd": 0.9567716575502987,
+      "r2_change": 0.004049650233214908,
+      "da_nonzero_pct": 50.513347022587276,
+      "da_all_pct": 45.05494505494506,
+      "nonzero_actual_n": 487,
+      "cv_rmse_normalized": 1.5136445743905866
+    },
+    "XGBoost_H7": {
+      "horizon": 7,
+      "family": "XGBoost",
+      "rmse_usd": 4.855710868330696,
+      "mae_usd": 3.362690523185722,
+      "r2_change": 0.02149365635673961,
+      "da_nonzero_pct": 59.36920222634509,
+      "da_all_pct": 58.60805860805861,
+      "nonzero_actual_n": 539,
+      "cv_rmse_normalized": 1.914417245909657
+    },
+    "XGBoost_H14": {
+      "horizon": 14,
+      "family": "XGBoost",
+      "rmse_usd": 7.031128508829688,
+      "mae_usd": 5.4381187943758045,
+      "r2_change": 0.029854845055029555,
+      "da_nonzero_pct": 57.98165137614679,
+      "da_all_pct": 57.87545787545788,
+      "nonzero_actual_n": 545,
+      "cv_rmse_normalized": 1.954748475221703
+    },
+    "GBM_H1": {
+      "horizon": 1,
+      "family": "GBM",
+      "rmse_usd": 1.7550444214649379,
+      "mae_usd": 0.9596007532951389,
+      "r2_change": 0.0007164980671023891,
+      "da_nonzero_pct": 50.71868583162218,
+      "da_all_pct": 45.23809523809524,
+      "nonzero_actual_n": 487,
+      "cv_rmse_normalized": 1.5152375676644445
+    },
+    "GBM_H7": {
+      "horizon": 7,
+      "family": "GBM",
+      "rmse_usd": 4.781236992785635,
+      "mae_usd": 3.408347096195004,
+      "r2_change": 0.05127892158394931,
+      "da_nonzero_pct": 59.554730983302406,
+      "da_all_pct": 58.791208791208796,
+      "nonzero_actual_n": 539,
+      "cv_rmse_normalized": 1.9496647856929297
+    },
+    "GBM_H14": {
+      "horizon": 14,
+      "family": "GBM",
+      "rmse_usd": 7.024768315338353,
+      "mae_usd": 5.4529119724401705,
+      "r2_change": 0.03160919220807157,
+      "da_nonzero_pct": 59.26605504587156,
+      "da_all_pct": 59.15750915750916,
+      "nonzero_actual_n": 545,
+      "cv_rmse_normalized": 2.0029742217694504
+    }
+  },
+  "baselines": {
+    "1": {
+      "rmse_usd": 1.7556749951641641,
+      "mae_usd": 0.940750915750916,
+      "r2_change": -1.7003848677976663e-06,
+      "da_nonzero_pct": 0.0,
+      "da_all_pct": 10.805860805860807,
+      "nonzero_actual_n": 487
+    },
+    "7": {
+      "rmse_usd": 4.908800126438097,
+      "mae_usd": 3.227289377289377,
+      "r2_change": -2.0046345647672936e-05,
+      "da_nonzero_pct": 0.0,
+      "da_all_pct": 1.282051282051282,
+      "nonzero_actual_n": 539
+    },
+    "14": {
+      "rmse_usd": 7.138550991371446,
+      "mae_usd": 5.2122710622710615,
+      "r2_change": -1.561143424022582e-05,
+      "da_nonzero_pct": 0.0,
+      "da_all_pct": 0.18315018315018314,
+      "nonzero_actual_n": 545
+    }
+  },
+  "model_sha256": "19cb10397d7cd9c24e66196e0ad36e0057406b5bda0e43bf66d3dff72e75b273"
+}

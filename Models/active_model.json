@@ -1,0 +1,7 @@
+{
+  "model_file": "nwcpredmodelv3.joblib",
+  "data_file": "Data/Versions/v3/combined.csv",
+  "metrics_file": "Assets/nwcpredmodelv3_metrics.json",
+  "version": "v3",
+  "activated_at": "2026-10-26T08:03:24.962998+00:00"
+}

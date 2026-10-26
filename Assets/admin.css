@@ -1,0 +1,36 @@
+.admin-title { font-family: Arial, sans-serif; font-size: clamp(24px, 2.8vw, 32px) !important; font-weight: 800 !important; text-align: center; margin: 0 0 24px !important; }
+.admin-title-left { text-align: left; }
+.admin-section-title { font-size: 20px !important; font-weight: 700 !important; margin: 12px 0 18px !important; }
+.st-key-admin_retrain button { min-height: 48px; background: #b4232d !important; border-color: #b4232d !important; }
+.st-key-admin_retrain button p { color: #ffffff !important; font-weight: 700 !important; }
+.st-key-admin_retrain button:hover:enabled { background: #941b24 !important; border-color: #941b24 !important; }
+.st-key-admin_retrain button:disabled { opacity: 0.5; }
+.st-key-admin_logout button, .st-key-admin_activate button { background: #17202b; border-color: #17202b; color: #ffffff; }
+.st-key-admin_logout button p, .st-key-admin_activate button p { color: inherit; font-weight: 600; }
+.st-key-admin_logout button:hover:enabled, .st-key-admin_activate button:hover:enabled { background: #2d3846; border-color: #2d3846; color: #ffffff; }
+.st-key-admin_cancel button { background: #ffffff; border: 1px solid #b4232d; color: #b4232d; min-height: 40px; }
+.st-key-admin_cancel button p { color: inherit; font-weight: 700; }
+.st-key-admin_cancel button:hover:enabled { background: #fdf0f1; border-color: #941b24; color: #941b24; }
+.st-key-admin_cancel button:disabled { opacity: 0.5; }
+
+[class*="st-key-admin_notice_error_"],
+[class*="st-key-admin_notice_success_"],
+[class*="st-key-admin_notice_info_"] {
+    border-radius: 8px; padding: 3px 8px 3px 0; overflow: hidden;
+}
+[class*="st-key-admin_notice_error_"] { background: #fef2f2; border: 1px solid #fecaca; }
+[class*="st-key-admin_notice_success_"] { background: #f0fdf4; border: 1px solid #bbf7d0; }
+[class*="st-key-admin_notice_info_"] { background: #eff6ff; border: 1px solid #bfdbfe; }
+[class*="st-key-admin_notice_"] [data-testid="stAlert"],
+[class*="st-key-admin_notice_"] [data-testid="stAlertContainer"] {
+    background: transparent; border: 0; margin: 0;
+}
+[class*="st-key-admin_notice_close_"] button {
+    min-height: 34px; min-width: 34px; padding: 0; border: 0;
+    background: transparent; color: #475569;
+}
+[class*="st-key-admin_notice_close_"] button p { font-size: 24px; line-height: 1; color: inherit; }
+[class*="st-key-admin_notice_close_"] button:hover:enabled { background: rgba(15,23,42,0.07); color: #0f172a; }
+
+[data-testid="stMain"]:has(.admin-title) button[aria-label="Download as CSV"],
+[data-testid="stMain"]:has(.admin-title) button[title="Download as CSV"] { display: none; }
