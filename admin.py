@@ -8,11 +8,11 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 
-from model_registry import activate_version, list_versions
-from prediction_engine import load_bundle, resolve_model_path
-from training import build_training_set
-from training_data import load_historical, make_admin_template, merge_data, parse_new_data, prepare_training_prices
-from training_jobs import cancel_retraining, get_job, is_running, start_retraining
+from retrain_function.model_registry import activate_version, list_versions
+from prediction_function.prediction_engine import load_bundle, resolve_model_path
+from retrain_function.training_setup import build_training_set
+from retrain_function.training_data import load_historical, make_admin_template, merge_data, parse_new_data, prepare_training_prices
+from retrain_function.training_status import cancel_retraining, get_job, is_running, start_retraining
 
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -21,7 +21,7 @@ DISPLAY_COLUMNS = {"coal": "Coal", "wti": "Oil", "gas": "Gas", "dxy": "DXY"}
 
 
 @st.cache_resource(show_spinner=False)
-def _cached_bundle(path: str, modified_ns: int, size: int):
+def _cached_testing_bundle(path: str, modified_ns: int, size: int):
     return load_bundle(path)
 
 
@@ -158,7 +158,7 @@ def _active_model(bundle: dict, raw: pd.DataFrame) -> None:
         st.caption(f"Terakhir dilatih: {_time(metadata['trained_at'])}")
     else:
         st.caption(f"Model disimpan: {_time(metadata.get('saved_at'))}")
-    rows = [{"Horizon": f"H+{h}", "Model terpilih": name, "RMSE CV": bundle.get("cv_rmse", {}).get(name)}
+    rows = [{"Horizon": f"H+{h}", "Model terpilih": name, "RMSE Testing (USD/tonne)": bundle["test_rmse_usd"][name]}
             for h, name in bundle["selected_models"].items()]
     st.dataframe(pd.DataFrame(rows), hide_index=True, width="stretch")
     with st.expander("Hyperparameter model aktif"):
@@ -230,9 +230,9 @@ def _job_panel() -> None:
             with st.expander("Rincian error retraining"):
                 st.code(job["error_detail"], language="text")
 
-
 def _retraining_form(raw: pd.DataFrame) -> None:
     st.html('<h2 class="admin-section-title">Update Model</h2>')
+
     busy = is_running(BASE_DIR)
     mode = st.radio("Sumber data retraining", ["Data historis tersimpan", "Historis + data baru"], horizontal=True, key="admin_data_mode", disabled=busy)
     candidate = raw
@@ -310,6 +310,7 @@ def _version_history(records: list[dict]) -> None:
                      "Data hingga": _date(metadata.get("data_end") or item.get("data_end")),
                      "Training hingga": _date(metadata.get("train_end"))})
     st.dataframe(pd.DataFrame(rows), hide_index=True, width="stretch")
+    
     alternatives = [item["version"] for item in records if not item.get("active")]
     if alternatives:
         with st.expander("Gunakan versi tersimpan"):
@@ -345,7 +346,7 @@ def render() -> None:
     try:
         path = resolve_model_path(BASE_DIR / "Models")
         stamp = path.stat()
-        bundle, _ = _cached_bundle(str(path), stamp.st_mtime_ns, stamp.st_size)
+        bundle, _ = _cached_testing_bundle(str(path), stamp.st_mtime_ns, stamp.st_size)
         raw = load_historical(BASE_DIR)
         records = list_versions(BASE_DIR)
         _active_model(bundle, raw)

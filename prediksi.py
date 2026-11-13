@@ -6,9 +6,9 @@ import json
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-from prediction_engine import load_bundle, predict_latest, resolve_model_path
-from prediction_io import make_template, read_upload, validate_and_prepare
-from prediction_report import DISCLAIMER_TEXT, build_prediction_pdf
+from prediction_function.prediction_engine import load_bundle, predict_latest, resolve_model_path
+from prediction_function.prediction_io import make_template, read_upload, validate_and_prepare
+from prediction_function.prediction_report import DISCLAIMER_TEXT, build_prediction_pdf
 
 import altair as alt
 import numpy as np
@@ -23,7 +23,7 @@ BLUE = "#2563eb"
 
 
 @st.cache_resource(show_spinner=False)
-def _cached_models(path: str, modified_ns: int, size: int) -> tuple[dict, dict]:
+def _cached_testing_models(path: str, modified_ns: int, size: int) -> tuple[dict, dict]:
     return load_bundle(path)
 
 
@@ -112,7 +112,7 @@ def _render_input() -> None:
     try:
         path = resolve_model_path(BASE_DIR / "Models")
         stamp = path.stat()
-        resources = _cached_models(str(path), stamp.st_mtime_ns, stamp.st_size)
+        resources = _cached_testing_models(str(path), stamp.st_mtime_ns, stamp.st_size)
         bundle, _ = resources
         version = bundle["metadata"].get("version", path.stem)
     except (OSError, ValueError) as error:
@@ -353,10 +353,10 @@ def _render_metrics(snapshot: dict, selected: dict) -> None:
             "DA mengevaluasi arah perubahan aktual yang tidak nol."
         )
 
-    if selected.get("cv_rmse") is not None:
+    if selected.get("test_rmse_usd") is not None:
         st.html(
             '<div class="prediction-cv-score">'
-            f'RMSE CV model terpilih: <strong>{selected["cv_rmse"]:.4f}</strong>'
+            f'RMSE Testing model terpilih: <strong>{selected["test_rmse_usd"]:.4f}</strong>'
         )
 
 
@@ -438,7 +438,7 @@ def _render_results() -> None:
     download_column, _, return_column = st.columns([1.3, 1, 0.8])
     with download_column:
         try:
-            report_files = (BASE_DIR / "prediction_report.py", BASE_DIR / "Assets" / "nwcast-logo.png")
+            report_files = (BASE_DIR / "prediction_function" / "prediction_report.py", BASE_DIR / "Assets" / "nwcast-logo.png")
             report_stamp = tuple((path.stat().st_mtime_ns, path.stat().st_size) for path in report_files)
             st.download_button(
                 "Download Hasil PDF", data=_result_pdf(snapshot, report_stamp), mime="application/pdf",
