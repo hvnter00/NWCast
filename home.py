@@ -4,7 +4,7 @@ from pathlib import Path
 import altair as alt
 import pandas as pd
 import streamlit as st
-from model_registry import active_dataset_path
+from retrain_function.model_registry import active_dataset_path
 
 BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "Data" / "Historical"
